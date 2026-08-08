@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 260" fill="none">
+  <!-- Plant Leaves Layer 1 (Back Leaves) -->
+  <path d="M100 150 Q60 90 20 70 Q50 120 90 145 Z" fill="#2d6a4f" />
+  <path d="M100 150 Q140 90 180 70 Q150 120 110 145 Z" fill="#2d6a4f" />
+  <path d="M100 140 Q40 60 10 30 Q50 90 95 135 Z" fill="#40916c" />
+  <path d="M100 140 Q160 60 190 30 Q150 90 105 135 Z" fill="#40916c" />
+
+  <!-- Plant Leaves Layer 2 (Center & Top Leaves) -->
+  <path d="M100 135 Q70 40 40 10 Q75 60 95 130 Z" fill="#52b788" />
+  <path d="M100 135 Q130 40 160 10 Q125 60 105 130 Z" fill="#52b788" />
+  <path d="M100 130 Q90 20 85 0 Q100 40 102 125 Z" fill="#74c69d" />
+  <path d="M100 130 Q110 20 115 0 Q100 40 98 125 Z" fill="#74c69d" />
+
+  <!-- Plant Stems -->
+  <path d="M100 160 C98 130 90 90 85 10" stroke="#1b4332" stroke-width="4" stroke-linecap="round" />
+  <path d="M100 160 C102 130 110 90 115 10" stroke="#1b4332" stroke-width="4" stroke-linecap="round" />
+  <path d="M100 160 C95 140 60 80 15 30" stroke="#1b4332" stroke-width="4" stroke-linecap="round" />
+  <path d="M100 160 C105 140 140 80 185 30" stroke="#1b4332" stroke-width="4" stroke-linecap="round" />
+
+  <!-- Lush Overlay Leaves -->
+  <path d="M100 145 Q80 80 55 40 Q85 85 98 142 Z" fill="#74c69d" />
+  <path d="M100 145 Q120 80 145 40 Q115 85 102 142 Z" fill="#52b788" />
+
+  <!-- Woven Basket Pot Base -->
+  <ellipse cx="100" cy="165" rx="42" ry="12" fill="#a07156" />
+  <path d="M58 165 L68 235 C68 245 132 245 132 235 L142 165 Z" fill="#c68a68" stroke="#8d5b4c" stroke-width="3" />
+  
+  <!-- Woven Pattern Lines on Pot -->
+  <path d="M62 185 Q100 195 138 185" stroke="#a07156" stroke-width="3" fill="none" />
+  <path d="M65 205 Q100 215 135 205" stroke="#a07156" stroke-width="3" fill="none" />
+  <path d="M67 225 Q100 235 133 225" stroke="#a07156" stroke-width="3" fill="none" />
+
+  <path d="M80 165 L84 238" stroke="#a07156" stroke-width="2.5" />
+  <path d="M100 165 L100 240" stroke="#a07156" stroke-width="2.5" />
+  <path d="M120 165 L116 238" stroke="#a07156" stroke-width="2.5" />
+
+  <!-- Pot Rim -->
+  <ellipse cx="100" cy="165" rx="43" ry="10" fill="#d49b78" stroke="#8d5b4c" stroke-width="2" />
+</svg>
