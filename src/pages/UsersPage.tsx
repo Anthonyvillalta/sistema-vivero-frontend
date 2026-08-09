@@ -279,8 +279,109 @@ export const UsersPage: React.FC = () => {
 
   return (
     <div className="space-y-4 sm:space-y-6 pb-24 lg:pb-8">
-      {/* Header Banner */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-[#0f2e1f] via-[#1b4332] to-[#2d6a4f] rounded-2xl sm:rounded-3xl p-4 sm:p-6 text-white shadow-xl">
+      {/* Mobile Header & Mini KPIs (Matching CustomersPage) */}
+      <div className="lg:hidden space-y-2.5 pt-0.5">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-xl font-black text-slate-800 tracking-tight flex items-center gap-2">
+              <Users className="w-5 h-5 text-vivero-primary" />
+              Gestión de Usuarios
+            </h2>
+            <p className="text-[11px] text-slate-500 font-medium">
+              Roles y permisos del sistema ERP
+            </p>
+          </div>
+          <button
+            onClick={handleRefresh}
+            disabled={loading || refreshing}
+            className="p-2 bg-slate-100 hover:bg-slate-200 rounded-xl text-slate-700 active:scale-95 transition-all"
+            title="Actualizar"
+          >
+            <RefreshCw className={`w-4 h-4 ${refreshing ? 'animate-spin' : ''}`} />
+          </button>
+        </div>
+
+        {/* Mini KPIs Grid 3 Columns (Matching CustomersPage) */}
+        <div className="grid grid-cols-3 gap-2">
+          <div className="bg-gradient-to-br from-[#1b4332] to-[#2d6a4f] rounded-2xl p-2.5 text-white shadow-md">
+            <Users className="w-4 h-4 text-vivero-mint mb-1" />
+            <span className="block text-lg font-black leading-none">{users.length}</span>
+            <span className="text-[9px] font-bold text-emerald-200 mt-1 block">Usuarios</span>
+          </div>
+
+          <div className="bg-white rounded-2xl p-2.5 border border-slate-200/80 shadow-2xs">
+            <Crown className="w-4 h-4 text-purple-600 mb-1" />
+            <span className="block text-lg font-black text-slate-800 leading-none">{countAdmins}</span>
+            <span className="text-[9px] font-bold text-slate-400 mt-1 block">Admins 👑</span>
+          </div>
+
+          <div className="bg-white rounded-2xl p-2.5 border border-slate-200/80 shadow-2xs">
+            <Briefcase className="w-4 h-4 text-blue-600 mb-1" />
+            <span className="block text-lg font-black text-slate-800 leading-none">{countVendedores}</span>
+            <span className="text-[9px] font-bold text-slate-400 mt-1 block">Vendedores 💼</span>
+          </div>
+        </div>
+
+        {/* Integrated Search & Plus Action Bar (Matching CustomersPage) */}
+        <div className="bg-white p-2.5 rounded-2xl border border-slate-200/80 shadow-card space-y-2">
+          <div className="relative">
+            <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={e => setSearchTerm(e.target.value)}
+              placeholder="Buscar por usuario, correo o teléfono..."
+              className="w-full pl-8 pr-12 py-2 bg-slate-100 focus:bg-white text-xs font-semibold text-slate-800 rounded-xl border border-transparent focus:border-vivero-mint/60 focus:outline-none transition-all"
+            />
+            {searchTerm ? (
+              <button
+                onClick={() => setSearchTerm('')}
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            ) : (
+              <button
+                onClick={openCreateModal}
+                className="absolute right-1.5 top-1/2 -translate-y-1/2 w-8 h-8 bg-[#1b4332] hover:bg-vivero-primary text-vivero-mint rounded-xl flex items-center justify-center shadow-md active:scale-90 transition-all"
+                title="Nuevo Usuario"
+              >
+                <Plus className="w-4 h-4 stroke-[3]" />
+              </button>
+            )}
+          </div>
+
+          {/* Role Filter Tabs (Matching CustomersPage) */}
+          <div className="flex items-center gap-1 overflow-x-auto no-scrollbar">
+            {[
+              { id: 'TODOS', label: 'Todos', icon: Users },
+              { id: 'ROLE_ADMIN', label: 'Admins', icon: Crown },
+              { id: 'ROLE_VENDEDOR', label: 'Vendedores', icon: Briefcase },
+              { id: 'ROLE_REPARTIDOR', label: 'Repartidores', icon: Truck },
+            ].map(tab => {
+              const Icon = tab.icon;
+              const isActive = roleFilter === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setRoleFilter(tab.id as any)}
+                  className={`px-3 py-1.5 rounded-xl text-[11px] font-extrabold whitespace-nowrap flex items-center gap-1 transition-all flex-1 justify-center ${
+                    isActive
+                      ? 'bg-[#1b4332] text-vivero-mint shadow-md'
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  }`}
+                >
+                  <Icon className="w-3 h-3" />
+                  <span>{tab.label}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* Desktop Header Banner */}
+      <div className="hidden lg:block relative overflow-hidden bg-gradient-to-br from-[#0f2e1f] via-[#1b4332] to-[#2d6a4f] rounded-2xl sm:rounded-3xl p-4 sm:p-6 text-white shadow-xl">
         <div className="absolute -top-20 -right-16 w-40 sm:w-64 h-40 sm:h-64 rounded-full bg-vivero-mint/15 blur-3xl pointer-events-none" />
         <div className="absolute -bottom-24 -left-12 w-48 sm:w-72 h-48 sm:h-72 rounded-full bg-emerald-400/10 blur-3xl pointer-events-none" />
 
@@ -355,8 +456,8 @@ export const UsersPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Control & Filter Bar */}
-      <div className="bg-white rounded-2xl p-3 sm:p-4 border border-slate-200/80 shadow-2xs space-y-3">
+      {/* Control & Filter Bar (Desktop) */}
+      <div className="hidden lg:block bg-white rounded-2xl p-3 sm:p-4 border border-slate-200/80 shadow-2xs space-y-3">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
           
           {/* Search Box */}
