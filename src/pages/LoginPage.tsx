@@ -205,7 +205,7 @@ export const LoginPage: React.FC = () => {
                   value={email}
                   onChange={(e) => { setEmail(e.target.value); setError(''); }}
                   required
-                  placeholder="ej: anthony.villalta@hotmail.com"
+                  placeholder="ej: admin@vivero.com"
                   className="w-full pl-13 pr-4 py-3.5 bg-slate-800/80 border border-slate-700/80 rounded-2xl text-sm font-semibold text-white placeholder-slate-500 focus:outline-none focus:border-vivero-mint focus:ring-2 focus:ring-vivero-mint/20 transition-all shadow-inner"
                 />
               </div>
