@@ -2,19 +2,6 @@ import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useCompanySettings } from '../context/CompanyContext';
 import { Lock, User, Eye, EyeOff, ArrowRight, Leaf, AlertCircle, CheckCircle2 } from 'lucide-react';
-import { RoleName } from '../types';
-
-const ROLE_LABELS: Record<RoleName, string> = {
-  ROLE_ADMIN: ' Administrador',
-  ROLE_VENDEDOR: 'Vendedor',
-  ROLE_REPARTIDOR: 'Repartidor'
-};
-
-const ROLE_ICONS: Record<RoleName, React.ReactNode> = {
-  ROLE_ADMIN: '👑',
-  ROLE_VENDEDOR: '💼',
-  ROLE_REPARTIDOR: '🚚'
-};
 
 export const LoginPage: React.FC = () => {
   const { login, isLoading } = useAuth();
@@ -24,8 +11,6 @@ export const LoginPage: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-
-  const userRole: RoleName = 'ROLE_ADMIN';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -122,14 +107,6 @@ export const LoginPage: React.FC = () => {
                 >
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
-              </div>
-            </div>
-
-            <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex items-center gap-3">
-              <div className="text-2xl">{ROLE_ICONS[userRole]}</div>
-              <div>
-                <p className="text-xs text-emerald-200/60">Acceso como</p>
-                <p className="text-sm font-bold text-white">{ROLE_LABELS[userRole]}</p>
               </div>
             </div>
 
