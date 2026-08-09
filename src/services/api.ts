@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { DashboardMetrics, Product, Order, Customer, UnitType, OrderStatus, Supplier, Purchase, Driver, DeliveryMethod, Category, DeliveryRecord, Expense } from '../types';
+import { DashboardMetrics, Product, Order, Customer, UnitType, OrderStatus, Supplier, Purchase, Driver, DeliveryMethod, Category, DeliveryRecord, Expense, SalesSummary, ProductSales, ExpenseSummary, PurchaseSummary, ProfitMargin, InventoryValuation, InventoryValuationDetail, TopCustomer } from '../types';
 
 export const MOCK_CUSTOMERS: Customer[] = [
   {
@@ -647,4 +647,30 @@ export const companySettingsApi = {
 export const aiApi = {
   analyzeProductImage: (data: { image: string; mimeType: string }) =>
     api.post<ProductAnalysis>('/ai/analyze-product', data),
+};
+
+export const reportsApi = {
+  getSalesSummary: (params?: { startDate?: string; endDate?: string }) =>
+    api.get<SalesSummary>('/reports/sales-summary', { params }),
+
+  getProductSalesRanking: (params?: { startDate?: string; endDate?: string; limit?: number }) =>
+    api.get<ProductSales[]>('/reports/sales-by-product', { params }),
+
+  getExpenseSummary: (params?: { startDate?: string; endDate?: string }) =>
+    api.get<ExpenseSummary>('/reports/expenses-summary', { params }),
+
+  getPurchaseSummary: (params?: { startDate?: string; endDate?: string }) =>
+    api.get<PurchaseSummary>('/reports/purchases-summary', { params }),
+
+  getProfitMargin: (params?: { startDate?: string; endDate?: string }) =>
+    api.get<ProfitMargin>('/reports/profit-margins', { params }),
+
+  getInventoryValuation: () =>
+    api.get<InventoryValuation>('/reports/inventory-valuation'),
+
+  getInventoryValuationDetail: () =>
+    api.get<InventoryValuationDetail>('/reports/inventory-valuation-detail'),
+
+  getTopCustomers: (params?: { startDate?: string; endDate?: string; limit?: number }) =>
+    api.get<TopCustomer[]>('/reports/top-customers', { params }),
 };

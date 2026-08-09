@@ -227,6 +227,129 @@ export interface DashboardMetrics {
   upcomingDeliveries: Order[];
 }
 
+export interface SalesSummary {
+  totalSales: number;
+  totalTransactions: number;
+  averageTicket: number;
+  yesterdaySales: number;
+  growthPercentage?: number;
+  dailyTrend: { date: string; amount: number }[];
+  paymentBreakdown: { method: string; amount: number; count: number }[];
+  salesByCategory: CategorySales[];
+}
+
+export interface CategorySales {
+  categoryId: number;
+  categoryName: string;
+  totalAmount: number;
+  totalQuantity: number;
+  averagePrice?: number;
+}
+
+export interface ProductSales {
+  productId: number;
+  productName: string;
+  variety: string;
+  categoryName: string;
+  quantitySold: number;
+  totalRevenue: number;
+  totalCost: number;
+  grossProfit: number;
+  profitMargin: number;
+}
+
+export interface ExpenseSummary {
+  totalExpenses: number;
+  totalTransactions: number;
+  averageExpense: number;
+  byCategory: { category: string; amount: number; count: number }[];
+  dailyTrend: { date: string; amount: number }[];
+}
+
+export interface PurchaseSummary {
+  totalPurchases: number;
+  totalTransactions: number;
+  averagePurchase: number;
+  topSuppliers: { supplierId: number; supplierName: string; amount: number; purchaseCount: number }[];
+  dailyTrend: { date: string; amount: number }[];
+}
+
+export interface ProfitMargin {
+  totalRevenue: number;
+  totalCostOfGoods: number;
+  grossProfit: number;
+  grossProfitMargin: number;
+  totalExpenses: number;
+  netProfit: number;
+  netProfitMargin: number;
+  topProductsByProfit: ProductSales[];
+  categoryMargins: CategorySales[];
+}
+
+export interface StockProduct {
+  productId: number;
+  productName: string;
+  categoryName: string;
+  unitType: string;
+  stock: number;
+  costPrice: number;
+  stockValue: number;
+  minStock: number;
+}
+
+export interface InventoryValuation {
+  totalStockValue: number;
+  totalProducts: number;
+  lowStockCount: number;
+  outOfStockCount: number;
+  valuationByCategory: { categoryId: number; categoryName: string; totalValue: number; totalQuantity: number }[];
+  lowStockProducts: StockProduct[];
+}
+
+export interface StockCategoryValuation {
+  categoryId: number;
+  categoryName: string;
+  totalCostValue: number;
+  totalPotentialRevenue: number;
+  totalPotentialProfit: number;
+  totalProducts: number;
+  totalQuantity: number;
+}
+
+export interface LowStockAlert {
+  productId: number;
+  productName: string;
+  categoryName: string;
+  unitType: string;
+  stock: number;
+  availableStock: number;
+  costPrice: number;
+  minPrice: number;
+  minStock: number;
+  stockValue: number;
+  daysUntilOutOfStock?: number;
+}
+
+export interface InventoryValuationDetail {
+  totalCostStockValue: number;
+  totalPotentialRevenue: number;
+  totalPotentialProfit: number;
+  totalProducts: number;
+  totalSpecies: number;
+  totalAvailableStock: number;
+  valuationByCategory: StockCategoryValuation[];
+  lowStockAlerts: LowStockAlert[];
+}
+
+export interface TopCustomer {
+  customerId: number;
+  fullName: string;
+  phone: string;
+  purchaseCount: number;
+  totalPurchases: number;
+  customerLifetimeValue: number;
+}
+
 export function getProductPricing(product: { price: number; originalPrice?: number; discountPercentage?: number }) {
   const priceNum = Number(product.price) || 0;
   const origNum = Number(product.originalPrice) || 0;
