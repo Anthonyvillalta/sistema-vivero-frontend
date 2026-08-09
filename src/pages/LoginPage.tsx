@@ -298,13 +298,13 @@ export const LoginPage: React.FC = () => {
             {/* Demo Credentials Pill */}
             <div className="pt-3 text-center border-t border-slate-800/80 mt-4">
               <p className="text-[10px] font-extrabold text-slate-500 uppercase tracking-wider mb-2">
-                Credenciales Demo de prueba:
+                Credenciales de Demo :
               </p>
               <button
                 type="button"
                 onClick={() => handleQuickFill('admin@vivero.com', 'admin123')}
                 className="inline-flex items-center gap-2 px-3.5 py-2 bg-slate-800/90 hover:bg-vivero-mint/10 border border-slate-700/80 hover:border-vivero-mint/40 rounded-xl text-xs font-bold text-slate-300 hover:text-vivero-mint transition-all active:scale-95"
-                title="Hic clic para autocompletar credenciales de prueba demo"
+                title="Has clic para autocompletar credenciales de demo"
               >
                 <span>admin@vivero.com</span>
                 <span className="text-slate-500">•</span>
