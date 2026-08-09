@@ -182,6 +182,161 @@ const DeliveryRow: React.FC<{ order: Order }> = ({ order }) => {
   );
 };
 
+const DashboardSkeleton: React.FC = () => {
+  return (
+    <div className="space-y-4 pb-24 lg:pb-8">
+      {/* Mobile Greeting & Hero Card Skeleton */}
+      <div className="lg:hidden space-y-3 pt-0.5">
+        <div className="space-y-1">
+          <div className="h-6 w-32 bg-slate-200 rounded-lg animate-pulse" />
+          <div className="h-3 w-40 bg-slate-200 rounded animate-pulse" />
+        </div>
+
+        {/* Hero Card Skeleton */}
+        <div className="bg-gradient-to-r from-[#113320] via-[#1b4332] to-[#143d26] rounded-2xl p-4 text-white shadow-md flex items-center justify-between min-h-[110px]">
+          <div className="space-y-2 w-1/2">
+            <div className="h-3 w-20 bg-white/20 rounded animate-pulse" />
+            <div className="h-6 w-32 bg-white/30 rounded-lg animate-pulse" />
+            <div className="h-3 w-24 bg-white/20 rounded animate-pulse" />
+          </div>
+          <div className="w-16 h-16 bg-white/10 rounded-2xl animate-pulse" />
+        </div>
+
+        {/* Mobile Mini Stats 3x3 Grid Skeleton */}
+        <div className="grid grid-cols-3 gap-1.5">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className="bg-white rounded-2xl p-2.5 border border-slate-200/80 shadow-2xs space-y-2">
+              <div className="flex items-center gap-1">
+                <div className="w-6 h-6 rounded-lg bg-slate-200 animate-pulse" />
+                <div className="h-2 w-10 bg-slate-200 rounded animate-pulse" />
+              </div>
+              <div className="h-4 w-16 bg-slate-200 rounded animate-pulse" />
+              <div className="h-2 w-12 bg-slate-200 rounded animate-pulse" />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Desktop Greeting Header Skeleton */}
+      <div className="hidden lg:flex items-center justify-between gap-4">
+        <div className="space-y-1">
+          <div className="h-7 w-48 bg-slate-200 rounded-xl animate-pulse" />
+          <div className="h-4 w-64 bg-slate-200 rounded-lg animate-pulse" />
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="h-10 w-28 bg-slate-200 rounded-xl animate-pulse" />
+          <div className="h-10 w-36 bg-slate-200 rounded-xl animate-pulse" />
+        </div>
+      </div>
+
+      {/* Desktop 4 Main KPI Cards Skeleton */}
+      <div className="hidden lg:grid grid-cols-4 gap-4">
+        {Array.from({ length: 4 }).map((_, i) => (
+          <div key={i} className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-card space-y-3">
+            <div className="flex items-center justify-between">
+              <div className="w-10 h-10 bg-slate-200 rounded-xl animate-pulse" />
+              <div className="h-4 w-12 bg-slate-200 rounded-full animate-pulse" />
+            </div>
+            <div className="space-y-1">
+              <div className="h-3 w-20 bg-slate-200 rounded animate-pulse" />
+              <div className="h-7 w-32 bg-slate-200 rounded-lg animate-pulse" />
+            </div>
+            <div className="h-3 w-24 bg-slate-200 rounded animate-pulse" />
+          </div>
+        ))}
+      </div>
+
+      {/* Sales Chart & Top Products Grid Skeleton */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+        {/* Sales Chart Card Skeleton */}
+        <div className="lg:col-span-7 xl:col-span-8 bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-card space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="space-y-1">
+              <div className="h-5 w-40 bg-slate-200 rounded-lg animate-pulse" />
+              <div className="h-3 w-28 bg-slate-200 rounded animate-pulse" />
+            </div>
+            <div className="h-8 w-24 bg-slate-200 rounded-xl animate-pulse" />
+          </div>
+          {/* Chart placeholder */}
+          <div className="h-[220px] w-full bg-slate-100/80 rounded-xl animate-pulse flex items-end p-4 gap-3">
+            {Array.from({ length: 7 }).map((_, i) => (
+              <div
+                key={i}
+                className="flex-1 bg-slate-200 rounded-t-lg animate-pulse"
+                style={{ height: `${35 + (i * 14) % 60}%` }}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Top Selling Products List Skeleton */}
+        <div className="lg:col-span-5 xl:col-span-4 bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-card space-y-3">
+          <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+            <div className="h-5 w-36 bg-slate-200 rounded-lg animate-pulse" />
+            <div className="h-4 w-12 bg-slate-200 rounded animate-pulse" />
+          </div>
+          <div className="space-y-2.5">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <div key={i} className="flex items-center gap-3 p-2 bg-slate-50/80 rounded-xl">
+                <div className="w-10 h-10 bg-slate-200 rounded-lg flex-shrink-0 animate-pulse" />
+                <div className="flex-1 space-y-1.5 min-w-0">
+                  <div className="h-3.5 w-3/4 bg-slate-200 rounded animate-pulse" />
+                  <div className="h-2.5 w-1/2 bg-slate-200 rounded animate-pulse" />
+                </div>
+                <div className="h-4 w-14 bg-slate-200 rounded animate-pulse" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Deliveries / Pedidos & Critical Stock Cards Skeleton */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        {/* Deliveries Skeleton */}
+        <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-card space-y-3">
+          <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+            <div className="h-5 w-44 bg-slate-200 rounded-lg animate-pulse" />
+            <div className="h-6 w-16 bg-slate-200 rounded-full animate-pulse" />
+          </div>
+          <div className="space-y-2.5">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <div key={i} className="p-3 bg-slate-50 rounded-xl space-y-2">
+                <div className="flex items-center justify-between">
+                  <div className="h-4 w-24 bg-slate-200 rounded animate-pulse" />
+                  <div className="h-4 w-20 bg-slate-200 rounded-full animate-pulse" />
+                </div>
+                <div className="h-3 w-3/4 bg-slate-200 rounded animate-pulse" />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Critical Stock Skeleton */}
+        <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-card space-y-3">
+          <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+            <div className="h-5 w-36 bg-slate-200 rounded-lg animate-pulse" />
+            <div className="h-6 w-12 bg-slate-200 rounded-full animate-pulse" />
+          </div>
+          <div className="space-y-2.5">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <div key={i} className="flex items-center justify-between p-3 bg-slate-50 rounded-xl">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 bg-slate-200 rounded-lg animate-pulse" />
+                  <div className="space-y-1">
+                    <div className="h-3.5 w-28 bg-slate-200 rounded animate-pulse" />
+                    <div className="h-2.5 w-16 bg-slate-200 rounded animate-pulse" />
+                  </div>
+                </div>
+                <div className="h-4 w-12 bg-slate-200 rounded animate-pulse" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export const DashboardPage: React.FC<DashboardPageProps> = ({
   setActiveTab,
   onSelectProduct,
@@ -261,16 +416,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
   const deliveryAlertType = overdueCount > 0 ? 'overdue' : dueTodayCount > 0 ? 'today' : 'none';
 
   if (!data) {
-    return (
-      <div className="space-y-4 pb-24 lg:pb-8">
-        <LeavesLoader
-          message="Cargando datos desde la base de datos..."
-          submessage={retrying
-            ? 'Sin conexión con el backend. Reintentando automáticamente...'
-            : 'Conectando con el servidor...'}
-        />
-      </div>
-    );
+    return <DashboardSkeleton />;
   }
 
   return (
