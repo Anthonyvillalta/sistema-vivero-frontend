@@ -306,7 +306,7 @@ export const LoginPage: React.FC = () => {
                 className="inline-flex items-center gap-2 px-3.5 py-2 bg-slate-800/90 hover:bg-vivero-mint/10 border border-slate-700/80 hover:border-vivero-mint/40 rounded-xl text-xs font-bold text-slate-300 hover:text-vivero-mint transition-all active:scale-95"
                 title="Hic clic para autocompletar credenciales de prueba demo"
               >
-                <span>👑 admin@vivero.com</span>
+                <span>admin@vivero.com</span>
                 <span className="text-slate-500">•</span>
                 <span className="text-emerald-400 font-mono">admin123</span>
               </button>
