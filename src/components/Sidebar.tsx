@@ -15,7 +15,8 @@ import {
   Settings,
   LogOut,
   Leaf,
-  History
+  History,
+  Shield
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useCompanySettings } from '../context/CompanyContext';
@@ -48,6 +49,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => 
     { id: 'purchases', label: 'Compras', icon: Receipt },
     { id: 'expenses', label: 'Gastos', icon: DollarSign },
     { id: 'reports', label: 'Reportes', icon: BarChart3 },
+    { id: 'users', label: 'Usuarios', icon: Shield },
     { id: 'settings', label: 'Configuración', icon: Settings },
   ];
 

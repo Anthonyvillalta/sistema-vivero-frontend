@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { DashboardMetrics, Product, Order, Customer, UnitType, OrderStatus, Supplier, Purchase, Driver, DeliveryMethod, Category, DeliveryRecord, Expense, SalesSummary, ProductSales, ExpenseSummary, PurchaseSummary, ProfitMargin, InventoryValuation, InventoryValuationDetail, TopCustomer } from '../types';
+import { DashboardMetrics, Product, Order, Customer, UnitType, OrderStatus, Supplier, Purchase, Driver, DeliveryMethod, Category, DeliveryRecord, Expense, SalesSummary, ProductSales, ExpenseSummary, PurchaseSummary, ProfitMargin, InventoryValuation, InventoryValuationDetail, TopCustomer, User, RoleName } from '../types';
 
 export const MOCK_CUSTOMERS: Customer[] = [
   {
@@ -673,4 +673,37 @@ export const reportsApi = {
 
   getTopCustomers: (params?: { startDate?: string; endDate?: string; limit?: number }) =>
     api.get<TopCustomer[]>('/reports/top-customers', { params }),
+};
+
+export const authApi = {
+  login: (data: { username: string; password: string }) =>
+    api.post<{ token: string; tokenType: string; username: string; fullName: string; role: string }>('/auth/login', data),
+
+  register: (data: { username: string; password: string; fullName: string; email?: string; phone?: string; roleName?: string }) =>
+    api.post<{ token: string; tokenType: string; username: string; fullName: string; role: string }>('/auth/register', data),
+
+  health: () => api.get<string>('/auth/health'),
+};
+
+export const userApi = {
+  getAllUsers: () =>
+    api.get<User[]>('/users'),
+
+  getUserById: (id: number) =>
+    api.get<User>(`/users/${id}`),
+
+  createUser: (data: { username: string; password: string; fullName: string; email?: string; phone?: string; roleName?: string }) =>
+    api.post<User>('/users', data),
+
+  updateUser: (id: number, data: { fullName?: string; email?: string; phone?: string; roleName?: string; active?: boolean; password?: string }) =>
+    api.put<User>(`/users/${id}`, data),
+
+  toggleUserStatus: (id: number) =>
+    api.put<User>(`/users/${id}/toggle-status`),
+
+  deleteUser: (id: number) =>
+    api.delete(`/users/${id}`),
+
+  resetPassword: (id: number, newPassword: string) =>
+    api.put<User>(`/users/${id}`, { password: newPassword }),
 };

@@ -1,9 +1,13 @@
 export type RoleName = 'ROLE_ADMIN' | 'ROLE_VENDEDOR' | 'ROLE_REPARTIDOR';
 
 export interface User {
+  id?: number;
   username: string;
   fullName: string;
   role: RoleName;
+  email?: string;
+  phone?: string;
+  active?: boolean;
   token?: string;
 }
 

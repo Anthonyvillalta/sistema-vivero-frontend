@@ -24,6 +24,7 @@ const PurchasesPage = lazy(() => import('./pages/PurchasesPage').then(m => ({ de
 const ExpensesPage = lazy(() => import('./pages/ExpensesPage').then(m => ({ default: m.ExpensesPage })));
 const ReportsPage = lazy(() => import('./pages/ReportsPage').then(m => ({ default: m.ReportsPage })));
 const SettingsPage = lazy(() => import('./pages/SettingsPage').then(m => ({ default: m.SettingsPage })));
+const UsersPage = lazy(() => import('./pages/UsersPage').then(m => ({ default: m.UsersPage })));
 const LoginPage = lazy(() => import('./pages/LoginPage').then(m => ({ default: m.LoginPage })));
 const ProductDetailModal = lazy(() => import('./components/ProductDetailModal').then(m => ({ default: m.ProductDetailModal })));
 const CartDrawerModal = lazy(() => import('./components/CartDrawerModal').then(m => ({ default: m.CartDrawerModal })));
@@ -111,6 +112,7 @@ const MainContent: React.FC = () => {
             {activeTab === 'reports' && <ReportsPage />}
             {activeTab === 'categories' && <CategoriesPage />}
             {activeTab === 'delivery' && <DeliveryPage />}
+            {activeTab === 'users' && <UsersPage />}
             {activeTab === 'settings' && <SettingsPage />}
           </Suspense>
         </main>

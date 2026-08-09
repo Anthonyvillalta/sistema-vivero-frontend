@@ -16,7 +16,8 @@ import {
   Settings,
   LogOut,
   Leaf,
-  History
+  History,
+  Shield
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useCompanySettings } from '../context/CompanyContext';
@@ -54,6 +55,7 @@ export const MobileMoreMenu: React.FC<MobileMoreMenuProps> = ({
     { id: 'purchases', label: 'Compras', icon: Receipt, category: 'Compras' },
     { id: 'expenses', label: 'Gastos Operativos', icon: DollarSign, category: 'Finanzas' },
     { id: 'reports', label: 'Reportes Flujo', icon: BarChart3, category: 'Finanzas' },
+    { id: 'users', label: 'Usuarios', icon: Shield, category: 'Sistema' },
     { id: 'settings', label: 'Configuración', icon: Settings, category: 'Sistema' },
   ];
 
