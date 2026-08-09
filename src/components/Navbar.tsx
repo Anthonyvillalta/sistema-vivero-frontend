@@ -40,7 +40,7 @@ export const Navbar: React.FC<NavbarProps> = ({ searchTerm, setSearchTerm, activ
   };
 
   return (
-    <header className="sticky top-0 z-20 bg-white/90 backdrop-blur-md border-b border-slate-200/80 px-4 lg:px-8 py-3.5 flex items-center justify-between shadow-sm">
+    <header className="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-200/80 px-4 lg:px-8 py-3.5 flex items-center justify-between shadow-sm">
       {/* Mobile Logo Brand Header */}
       <div className="flex lg:hidden items-center gap-2">
         <div className="w-8 h-8 rounded-lg bg-vivero-dark flex items-center justify-center text-vivero-mint shadow-sm">

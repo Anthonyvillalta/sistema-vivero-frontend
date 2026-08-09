@@ -455,18 +455,13 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               </p>
             </div>
 
-            {/* Large Protruding Potted Plant Image (GPU Layer Synced) */}
-            <div className="absolute right-1 -top-7 bottom-0 w-32 sm:w-38 pointer-events-none flex items-end justify-center z-20">
-              <div className="absolute bottom-0 right-4 w-20 sm:w-24 h-2 rounded-full bg-black/40 blur-xs transform scale-y-50 z-10 pointer-events-none" />
+            {/* Large Protruding Potted Plant Image (Under Navbar Z-Index) */}
+            <div className="absolute right-1 -top-7 bottom-0 w-32 sm:w-38 pointer-events-none flex items-end justify-center z-0">
+              <div className="absolute bottom-0 right-4 w-20 sm:w-24 h-2 rounded-full bg-black/40 blur-xs transform scale-y-50 z-0 pointer-events-none" />
               <img
                 src="/planta.png"
                 alt={`Planta ${companyName}`}
-                className="w-full h-auto max-h-[145px] sm:max-h-[160px] object-contain relative z-20 origin-bottom drop-shadow-xl pointer-events-none"
-                style={{
-                  WebkitTransform: 'translateZ(0)',
-                  transform: 'translateZ(0)',
-                  willChange: 'transform'
-                }}
+                className="w-full h-auto max-h-[145px] sm:max-h-[160px] object-contain relative z-0 origin-bottom drop-shadow-xl pointer-events-none"
               />
             </div>
           </div>
