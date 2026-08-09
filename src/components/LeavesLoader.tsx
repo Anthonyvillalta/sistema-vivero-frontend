@@ -78,7 +78,7 @@ export const LeavesLoader: React.FC<LeavesLoaderProps> = ({
 }) => {
   return (
     <div
-      className={`relative flex flex-col items-center justify-center overflow-hidden ${compact ? 'py-8 gap-3' : 'py-24 gap-5'}`}
+      className={`relative flex flex-col items-center justify-center overflow-hidden w-full ${compact ? 'py-10 gap-3' : 'py-16 gap-5 min-h-[280px]'}`}
     >
       <div className="absolute inset-0 pointer-events-none">
         {LEAF_DROP.map((leaf, i) => (
@@ -90,7 +90,7 @@ export const LeavesLoader: React.FC<LeavesLoaderProps> = ({
               height: leaf.size,
               left: leaf.left,
               top: '-30px',
-              ['--fall-distance' as any]: compact ? '160px' : '240px',
+              ['--fall-distance' as any]: compact ? '180px' : '300px',
               ['--sway' as any]: `${leaf.sway}px`,
               ['--leaf-spin' as any]: `${leaf.spin}deg`,
               animation: `leaf-fall ${leaf.duration}s linear ${leaf.delay}s infinite`
@@ -99,24 +99,24 @@ export const LeavesLoader: React.FC<LeavesLoaderProps> = ({
         ))}
       </div>
 
-      <div className={`relative flex flex-col items-center justify-center gap-2 text-center ${compact ? 'scale-90' : ''}`}>
-        <div className="flex items-end gap-2">
+      <div className={`relative flex flex-col items-center justify-center gap-2.5 text-center ${compact ? 'scale-95' : ''}`}>
+        <div className="flex items-end gap-2.5 mb-1">
           {[0, 1, 2].map((i) => (
             <Leaf
               key={i}
               color={LEAF_COLORS[i]}
               style={{
-                width: 16,
-                height: 16,
+                width: 20,
+                height: 20,
                 position: 'relative',
                 animation: `leaf-dot 1.4s ease-in-out ${i * 0.22}s infinite`
               }}
             />
           ))}
         </div>
-        <p className="text-xs font-bold text-vivero-primary text-center">{message}</p>
+        <p className="text-xs sm:text-sm font-extrabold text-vivero-primary text-center tracking-wide">{message}</p>
         {submessage && (
-          <p className="text-[10px] font-semibold text-slate-400 text-center animate-pulse">{submessage}</p>
+          <p className="text-[11px] font-semibold text-slate-400 text-center animate-pulse">{submessage}</p>
         )}
       </div>
     </div>

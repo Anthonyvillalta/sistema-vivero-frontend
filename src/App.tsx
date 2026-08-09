@@ -163,7 +163,9 @@ const MainContent: React.FC = () => {
 };
 
 const PageFallback: React.FC = () => (
-  <LeavesLoader compact message="Cargando módulo..." />
+  <div className="min-h-[60vh] sm:min-h-[70vh] w-full flex flex-col items-center justify-center p-4 my-auto">
+    <LeavesLoader message="Cargando módulo..." submessage="Sincronizando datos con el servidor..." />
+  </div>
 );
 
 export function App() {
