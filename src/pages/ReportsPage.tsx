@@ -363,9 +363,11 @@ export const ReportsPage: React.FC = () => {
       `}</style>
 
       {/* Hero Header Banner */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-[#0f2e1f] via-[#1b4332] to-[#2d6a4f] rounded-2xl sm:rounded-3xl p-4 sm:p-6 text-white shadow-xl">
-        <div className="absolute -top-20 -right-16 w-40 sm:w-64 h-40 sm:h-64 rounded-full bg-vivero-mint/15 blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-24 -left-12 w-48 sm:w-72 h-48 sm:h-72 rounded-full bg-emerald-400/10 blur-3xl pointer-events-none" />
+      <div className="relative overflow-visible bg-gradient-to-br from-[#0f2e1f] via-[#1b4332] to-[#2d6a4f] rounded-2xl sm:rounded-3xl p-4 sm:p-6 text-white shadow-xl z-20">
+        <div className="absolute inset-0 rounded-2xl sm:rounded-3xl overflow-hidden pointer-events-none">
+          <div className="absolute -top-20 -right-16 w-40 sm:w-64 h-40 sm:h-64 rounded-full bg-vivero-mint/15 blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-24 -left-12 w-48 sm:w-72 h-48 sm:h-72 rounded-full bg-emerald-400/10 blur-3xl pointer-events-none" />
+        </div>
 
         <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="flex items-center gap-3">

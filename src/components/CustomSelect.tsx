@@ -86,9 +86,9 @@ export const CustomSelect: React.FC<CustomSelectProps> = ({
         </div>
       </button>
 
-      {/* Floating Popover Dropdown */}
+      {/* Floating Popover Dropdown (Touch Scrollable & Fully Unclipped) */}
       {isOpen && !disabled && (
-        <div className="absolute left-0 right-0 top-full mt-1.5 bg-white rounded-2xl border border-slate-200 shadow-2xl z-50 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-150 p-1.5 space-y-1 max-h-60 overflow-y-auto">
+        <div className="absolute left-0 right-0 sm:left-auto sm:right-0 min-w-[210px] top-full mt-1.5 bg-white rounded-2xl border border-slate-200 shadow-2xl z-50 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-150 p-1.5 space-y-1 max-h-64 sm:max-h-72 overflow-y-auto touch-pan-y">
           {options.map((opt) => {
             const isSelected = opt.value === value;
             return (
