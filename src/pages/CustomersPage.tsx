@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Customer } from '../types';
 import { customerApi } from '../services/api';
 import { useCompanySettings } from '../context/CompanyContext';
+import { CustomSelect } from '../components/CustomSelect';
 import {
   Users,
   Phone,
@@ -62,6 +63,12 @@ const formatExactDate = (rawDate?: string | any): string | null => {
 
   return typeof rawDate === 'string' && rawDate.trim() ? rawDate : null;
 };
+
+const DOC_TYPE_OPTIONS = [
+  { value: 'DNI', label: 'DNI (8 dígitos)', badge: 'Persona' },
+  { value: 'RUC', label: 'RUC (11 dígitos)', badge: 'Empresa' },
+  { value: 'CE', label: 'Carnet Extranjería', badge: 'Extranjero' }
+];
 
 export const CustomersPage: React.FC = () => {
   const { companyName } = useCompanySettings();
@@ -409,16 +416,13 @@ export const CustomersPage: React.FC = () => {
 
               <div className="grid grid-cols-2 gap-2.5">
                 <div>
-                  <label className="text-[10px] font-extrabold text-slate-600 uppercase block mb-0.5">Tipo Doc.</label>
-                  <select
+                  <CustomSelect
+                    label="Tipo Doc."
                     value={docType}
-                    onChange={e => setDocType(e.target.value)}
-                    className="w-full px-3 py-1.5 bg-slate-100 rounded-xl text-xs font-semibold text-slate-800 focus:outline-none"
-                  >
-                    <option value="DNI">DNI</option>
-                    <option value="RUC">RUC</option>
-                    <option value="CE">Carnet Ext.</option>
-                  </select>
+                    onChange={val => setDocType(val)}
+                    options={DOC_TYPE_OPTIONS}
+                    size="sm"
+                  />
                 </div>
 
                 <div>

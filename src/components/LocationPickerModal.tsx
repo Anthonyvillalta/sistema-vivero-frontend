@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
+import { CustomSelect } from './CustomSelect';
 import { MapPin, X, CheckCircle2, Search, Compass, Loader2, SlidersHorizontal, ChevronDown } from 'lucide-react';
 import { ubigeoApi } from '../services/api';
 
@@ -468,56 +469,52 @@ export const LocationPickerModal: React.FC<LocationPickerModalProps> = ({
             {showAdvancedFilters && (
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 border-t border-slate-200/80 animate-in fade-in duration-150">
                 <div>
-                  <label className="text-[10px] font-extrabold text-slate-400 uppercase block mb-0.5">País</label>
-                  <select
+                  <CustomSelect
+                    label="País"
                     value={country}
-                    onChange={e => setCountry(e.target.value)}
-                    className="w-full px-2 py-1.5 bg-white rounded-lg border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:border-vivero-primary"
-                  >
-                    <option value="Perú">🇵🇪 Perú</option>
-                  </select>
+                    onChange={val => setCountry(val)}
+                    options={[{ value: 'Perú', label: '🇵🇪 Perú' }]}
+                    size="sm"
+                  />
                 </div>
 
                 <div>
-                  <label className="text-[10px] font-extrabold text-slate-400 uppercase block mb-0.5">Departamento</label>
-                  <select
+                  <CustomSelect
+                    label="Departamento"
                     value={department}
-                    onChange={e => handleDepartmentChange(e.target.value)}
-                    className="w-full px-2 py-1.5 bg-white rounded-lg border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:border-vivero-primary"
-                  >
-                    <option value="">(Todos)</option>
-                    {dbDepartments.map(d => (
-                      <option key={d.id} value={d.name}>{d.name}</option>
-                    ))}
-                  </select>
+                    onChange={val => handleDepartmentChange(val)}
+                    options={[
+                      { value: '', label: '(Todos)' },
+                      ...dbDepartments.map(d => ({ value: d.name, label: d.name }))
+                    ]}
+                    size="sm"
+                  />
                 </div>
 
                 <div>
-                  <label className="text-[10px] font-extrabold text-slate-400 uppercase block mb-0.5">Provincia</label>
-                  <select
+                  <CustomSelect
+                    label="Provincia"
                     value={province}
-                    onChange={e => handleProvinceChange(e.target.value)}
-                    className="w-full px-2 py-1.5 bg-white rounded-lg border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:border-vivero-primary"
-                  >
-                    <option value="">(Todas las provincias)</option>
-                    {availableProvinces.map(p => (
-                      <option key={p.id} value={p.name}>{p.name}</option>
-                    ))}
-                  </select>
+                    onChange={val => handleProvinceChange(val)}
+                    options={[
+                      { value: '', label: '(Todas las provincias)' },
+                      ...availableProvinces.map(p => ({ value: p.name, label: p.name }))
+                    ]}
+                    size="sm"
+                  />
                 </div>
 
                 <div>
-                  <label className="text-[10px] font-extrabold text-slate-400 uppercase block mb-0.5">Distrito</label>
-                  <select
+                  <CustomSelect
+                    label="Distrito"
                     value={district}
-                    onChange={e => handleDistrictChange(e.target.value)}
-                    className="w-full px-2 py-1.5 bg-white rounded-lg border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:border-vivero-primary"
-                  >
-                    <option value="">(Todos los distritos)</option>
-                    {availableDistricts.map(dist => (
-                      <option key={dist.id} value={dist.name}>{dist.name}</option>
-                    ))}
-                  </select>
+                    onChange={val => handleDistrictChange(val)}
+                    options={[
+                      { value: '', label: '(Todos los distritos)' },
+                      ...availableDistricts.map(d => ({ value: d.name, label: d.name }))
+                    ]}
+                    size="sm"
+                  />
                 </div>
               </div>
             )}

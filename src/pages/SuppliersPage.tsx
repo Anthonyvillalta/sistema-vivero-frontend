@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { CustomSelect } from '../components/CustomSelect';
 import { Supplier, Purchase, Product } from '../types';
 import { supplierApi, purchaseApi, productApi } from '../services/api';
 import { useCompanySettings } from '../context/CompanyContext';
@@ -610,29 +611,23 @@ export const SuppliersPage: React.FC = () => {
 
             <form onSubmit={handleSavePurchase} className="space-y-2.5">
               <div>
-                <label className="text-[9px] font-extrabold text-slate-600 uppercase block mb-0.5">Proveedor</label>
-                <select
-                  value={purSupplierId}
-                  onChange={e => setPurSupplierId(Number(e.target.value))}
-                  className="w-full px-3 py-1.5 bg-slate-100 rounded-xl text-xs font-semibold text-slate-800 focus:outline-none"
-                >
-                  {suppliers.map(s => (
-                    <option key={s.id} value={s.id}>{s.companyName}</option>
-                  ))}
-                </select>
+                <CustomSelect
+                  label="Proveedor"
+                  value={purSupplierId.toString()}
+                  onChange={val => setPurSupplierId(Number(val))}
+                  options={suppliers.map(s => ({ value: s.id.toString(), label: s.companyName, description: s.contactName }))}
+                  size="sm"
+                />
               </div>
 
               <div>
-                <label className="text-[9px] font-extrabold text-slate-600 uppercase block mb-0.5">Producto / Insumo</label>
-                <select
-                  value={purProductId}
-                  onChange={e => setPurProductId(Number(e.target.value))}
-                  className="w-full px-3 py-1.5 bg-slate-100 rounded-xl text-xs font-semibold text-slate-800 focus:outline-none"
-                >
-                  {productsList.map(p => (
-                    <option key={p.id} value={p.id}>{p.name}</option>
-                  ))}
-                </select>
+                <CustomSelect
+                  label="Producto / Insumo"
+                  value={purProductId.toString()}
+                  onChange={val => setPurProductId(Number(val))}
+                  options={productsList.map(p => ({ value: p.id.toString(), label: p.name, description: p.categoryName }))}
+                  size="sm"
+                />
               </div>
 
               <div className="grid grid-cols-2 gap-2.5">

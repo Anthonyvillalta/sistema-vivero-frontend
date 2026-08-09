@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { CustomSelect } from '../components/CustomSelect';
 import {
   DollarSign,
   TrendingUp,
@@ -987,10 +988,16 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                 Ventas de los últimos 7 días
               </h3>
             </div>
-            <select className="px-2.5 py-1 bg-slate-100 rounded-xl text-[11px] font-bold text-slate-600 focus:outline-none border border-slate-200">
-              <option>Semana</option>
-              <option>Mes</option>
-            </select>
+            <CustomSelect
+              value="Semana"
+              onChange={() => {}}
+              options={[
+                { value: 'Semana', label: 'Semana' },
+                { value: 'Mes', label: 'Mes' }
+              ]}
+              size="sm"
+              className="w-28"
+            />
           </div>
 
             <div className="h-48 sm:h-52 w-full">

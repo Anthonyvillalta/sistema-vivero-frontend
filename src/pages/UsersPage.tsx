@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { CustomSelect } from '../components/CustomSelect';
 import {
   Users, Search, Plus, Edit2, Trash2, Shield, User as UserIcon,
   Lock, Eye, EyeOff, CheckCircle2, X, Save, AlertCircle,
@@ -50,6 +51,12 @@ const getRoleIcon = (role: string) => {
   if (role === 'ROLE_REPARTIDOR') return <Truck className="w-4 h-4 text-emerald-600" />;
   return <Briefcase className="w-4 h-4 text-blue-600" />;
 };
+
+const STATUS_FILTER_OPTIONS = [
+  { value: 'TODOS', label: 'Todos los Estados', badge: 'Todos', badgeColor: 'bg-slate-100 text-slate-600' },
+  { value: 'ACTIVOS', label: 'Solo Activos ✓', badge: 'Activos', badgeColor: 'bg-emerald-100 text-emerald-800' },
+  { value: 'INACTIVOS', label: 'Solo Inactivos 🚫', badge: 'Inactivos', badgeColor: 'bg-red-100 text-red-800' }
+];
 
 export const UsersPage: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -354,16 +361,14 @@ export const UsersPage: React.FC = () => {
           {/* View Mode Toggle & Status Filter */}
           <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
             
-            {/* Status Select */}
-            <select
+            {/* Status Custom Select */}
+            <CustomSelect
               value={statusFilter}
-              onChange={e => setStatusFilter(e.target.value as any)}
-              className="px-3 py-2 bg-slate-50 border border-slate-200/80 rounded-xl text-xs font-bold text-slate-700 focus:outline-none focus:border-vivero-primary"
-            >
-              <option value="TODOS">Todos los Estados</option>
-              <option value="ACTIVOS">Solo Activos ✓</option>
-              <option value="INACTIVOS">Solo Inactivos 🚫</option>
-            </select>
+              onChange={val => setStatusFilter(val as any)}
+              options={STATUS_FILTER_OPTIONS}
+              size="sm"
+              className="w-44"
+            />
 
             {/* View Mode Grid/Table */}
             <div className="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200/80">

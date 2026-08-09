@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { CustomSelect } from '../components/CustomSelect';
 import { ubigeoApi, deliveryMethodApi, productApi, companySettingsApi } from '../services/api';
 import { LeavesLoader } from '../components/LeavesLoader';
 import { DeliveryMethod, Product, getProductPricing } from '../types';
@@ -1208,34 +1209,32 @@ export const SettingsPage: React.FC = () => {
 
           {/* Parent Filters on Mobile */}
           {ubigeoSubTab === 'provinces' && (
-            <div className="flex items-center gap-2 text-xs font-bold text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
-              <span className="text-[11px] text-slate-500 whitespace-nowrap">Departamento:</span>
-              <select
+            <div className="w-full">
+              <CustomSelect
+                label="Filtrar por Departamento"
                 value={filterDept}
-                onChange={e => setFilterDept(e.target.value)}
-                className="w-full px-2 py-1 bg-white rounded-lg border border-slate-200 text-xs font-bold text-slate-800"
-              >
-                <option value="">(Todos los departamentos)</option>
-                {departments.map(d => (
-                  <option key={d.id} value={d.name}>{d.name}</option>
-                ))}
-              </select>
+                onChange={val => setFilterDept(val)}
+                options={[
+                  { value: '', label: '(Todos los departamentos)' },
+                  ...departments.map(d => ({ value: d.name, label: d.name }))
+                ]}
+                size="sm"
+              />
             </div>
           )}
 
           {ubigeoSubTab === 'districts' && (
-            <div className="flex items-center gap-2 text-xs font-bold text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
-              <span className="text-[11px] text-slate-500 whitespace-nowrap">Provincia:</span>
-              <select
+            <div className="w-full">
+              <CustomSelect
+                label="Filtrar por Provincia"
                 value={filterProv}
-                onChange={e => setFilterProv(e.target.value)}
-                className="w-full px-2 py-1 bg-white rounded-lg border border-slate-200 text-xs font-bold text-slate-800"
-              >
-                <option value="">(Todas las provincias)</option>
-                {provinces.map(p => (
-                  <option key={p.id} value={p.name}>{p.name} ({p.departmentName})</option>
-                ))}
-              </select>
+                onChange={val => setFilterProv(val)}
+                options={[
+                  { value: '', label: '(Todas las provincias)' },
+                  ...provinces.map(p => ({ value: p.name, label: `${p.name} (${p.departmentName})` }))
+                ]}
+                size="sm"
+              />
             </div>
           )}
 
@@ -1669,21 +1668,31 @@ export const SettingsPage: React.FC = () => {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-slate-500 text-[11px] font-bold block">Moneda Principal de Facturación</label>
-                  <select className="w-full px-3 py-2 bg-slate-50 sm:bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-800 focus:outline-none">
-                    <option value="PEN">Soles Peruanos (S/)</option>
-                    <option value="USD">Dólares Americanos ($)</option>
-                  </select>
+                  <CustomSelect
+                    label="Moneda Principal de Facturación"
+                    value="PEN"
+                    onChange={() => {}}
+                    options={[
+                      { value: 'PEN', label: 'Soles Peruanos (S/)', badge: 'PEN' },
+                      { value: 'USD', label: 'Dólares Americanos ($)', badge: 'USD' }
+                    ]}
+                    size="sm"
+                  />
                 </div>
               </div>
 
               <div className="space-y-1 pt-2 border-t border-slate-100">
-                <label className="text-slate-500 text-[11px] font-bold block">Comprobante Predeterminado en Ventas POS</label>
-                <select className="w-full px-3 py-2 bg-slate-50 sm:bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-800 focus:outline-none">
-                  <option value="BOLETA">Boleta de Venta Electrónica</option>
-                  <option value="FACTURA">Factura Electrónica</option>
-                  <option value="TICKET">Nota de Venta / Ticket Interno</option>
-                </select>
+                <CustomSelect
+                  label="Comprobante Predeterminado en Ventas POS"
+                  value="BOLETA"
+                  onChange={() => {}}
+                  options={[
+                    { value: 'BOLETA', label: 'Boleta de Venta Electrónica', badge: 'SUNAT' },
+                    { value: 'FACTURA', label: 'Factura Electrónica', badge: 'RUC' },
+                    { value: 'TICKET', label: 'Nota de Venta / Ticket Interno', badge: 'Interno' }
+                  ]}
+                  size="sm"
+                />
               </div>
             </div>
 
@@ -2193,27 +2202,29 @@ export const SettingsPage: React.FC = () => {
               />
             </div>
 
-            <select
+            <CustomSelect
               value={discountCatFilter}
-              onChange={e => setDiscountCatFilter(e.target.value)}
-              className="w-full px-2.5 py-1.5 bg-slate-50 rounded-lg text-[10px] sm:text-[11px] font-bold text-slate-800 border border-slate-200/80 focus:outline-none focus:border-vivero-primary"
-            >
-              <option value="TODOS">Todas las Categorías</option>
-              <option value="Grass">Grass Natural</option>
-              <option value="Plantas">Plantas Ornamentales</option>
-              <option value="Árboles">Árboles y Palmeras</option>
-              <option value="Accesorios">Accesorios e Insumos</option>
-            </select>
+              onChange={val => setDiscountCatFilter(val)}
+              options={[
+                { value: 'TODOS', label: 'Todas las Categorías' },
+                { value: 'Grass', label: 'Grass Natural' },
+                { value: 'Plantas', label: 'Plantas Ornamentales' },
+                { value: 'Árboles', label: 'Árboles y Palmeras' },
+                { value: 'Accesorios', label: 'Accesorios e Insumos' }
+              ]}
+              size="sm"
+            />
 
-            <select
+            <CustomSelect
               value={discountStatusFilter}
-              onChange={e => setDiscountStatusFilter(e.target.value as any)}
-              className="w-full px-2.5 py-1.5 bg-slate-50 rounded-lg text-[10px] sm:text-[11px] font-bold text-slate-800 border border-slate-200/80 focus:outline-none focus:border-vivero-primary"
-            >
-              <option value="ALL">Todos los Productos</option>
-              <option value="WITH_DISCOUNT">🔥 Solo Con Oferta / Descuento</option>
-              <option value="NO_DISCOUNT">Sin Descuento</option>
-            </select>
+              onChange={val => setDiscountStatusFilter(val as any)}
+              options={[
+                { value: 'ALL', label: 'Todos los Productos', badge: 'Todos' },
+                { value: 'WITH_DISCOUNT', label: '🔥 Solo Con Oferta / Descuento', badge: 'Oferta', badgeColor: 'bg-rose-100 text-rose-800' },
+                { value: 'NO_DISCOUNT', label: 'Sin Descuento', badge: 'Normal' }
+              ]}
+              size="sm"
+            />
           </div>
 
           {/* Table / Cards List */}
@@ -2508,31 +2519,25 @@ export const SettingsPage: React.FC = () => {
 
               {modalType === 'province' && (
                 <div>
-                  <label className="text-slate-500 block mb-1">Departamento Perteneciente</label>
-                  <select
-                    value={formDeptId ?? (departments[0]?.id || '')}
-                    onChange={e => setFormDeptId(Number(e.target.value))}
-                    className="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-vivero-primary bg-slate-50 sm:bg-white"
-                  >
-                    {departments.map(d => (
-                      <option key={d.id} value={d.id}>{d.name}</option>
-                    ))}
-                  </select>
+                  <CustomSelect
+                    label="Departamento Perteneciente"
+                    value={(formDeptId ?? (departments[0]?.id || '')).toString()}
+                    onChange={val => setFormDeptId(Number(val))}
+                    options={departments.map(d => ({ value: d.id.toString(), label: d.name }))}
+                    size="sm"
+                  />
                 </div>
               )}
 
               {modalType === 'district' && (
                 <div>
-                  <label className="text-slate-500 block mb-1">Provincia Perteneciente</label>
-                  <select
-                    value={formProvId ?? (provinces[0]?.id || '')}
-                    onChange={e => setFormProvId(Number(e.target.value))}
-                    className="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-vivero-primary bg-slate-50 sm:bg-white"
-                  >
-                    {provinces.map(p => (
-                      <option key={p.id} value={p.id}>{p.name} ({p.departmentName})</option>
-                    ))}
-                  </select>
+                  <CustomSelect
+                    label="Provincia Perteneciente"
+                    value={(formProvId ?? (provinces[0]?.id || '')).toString()}
+                    onChange={val => setFormProvId(Number(val))}
+                    options={provinces.map(p => ({ value: p.id.toString(), label: `${p.name} (${p.departmentName})` }))}
+                    size="sm"
+                  />
                 </div>
               )}
 

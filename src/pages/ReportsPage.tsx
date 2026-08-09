@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { CustomSelect } from '../components/CustomSelect';
 import {
   TrendingUp, DollarSign, ShoppingCart, Package, Users,
   FileText, Download, RefreshCw, ChevronDown,
@@ -110,6 +111,14 @@ const TableSearch: React.FC<{ placeholder: string; value: string; onChange: (v: 
       <Search className="absolute left-3 top-2.5 w-4 h-4 text-slate-400" />
     </div>
   );
+
+const DATE_RANGE_OPTIONS = [
+  { value: '7', label: 'Últimos 7 días', badge: '7D' },
+  { value: '30', label: 'Últimos 30 días', badge: '30D' },
+  { value: '90', label: 'Últimos 90 días', badge: '90D' },
+  { value: 'all', label: 'Todo el año', badge: '1 Año' },
+  { value: 'custom', label: 'Rango personalizado', badge: 'Manual' }
+];
 
 export const ReportsPage: React.FC = () => {
   const [activeView, setActiveView] = useState<ActiveView>('sales');
@@ -373,21 +382,14 @@ export const ReportsPage: React.FC = () => {
             <RefreshCw className={`w-4 h-4 ${refreshing ? 'animate-spin' : ''}`} />
             Actualizar
           </button>
-          <div className="relative">
-            <select
-              value={dateRange}
-              onChange={e => setDateRange(e.target.value as DateRange)}
-              className="appearance-none pl-3.5 pr-10 py-2 bg-white border border-slate-200 rounded-xl text-sm font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-vivero-mint focus:border-transparent transition-all"
-            >
-              <option value="7">Últimos 7 días</option>
-              <option value="30">Últimos 30 días</option>
-              <option value="90">Últimos 90 días</option>
-              <option value="all">Todo el año</option>
-              <option value="custom">Rango personalizado</option>
-            </select>
-            <Calendar className="absolute left-3 top-2.5 w-4 h-4 text-slate-400 pointer-events-none" />
-            <ChevronDown className="absolute right-3 top-2.5 w-4 h-4 text-slate-400 pointer-events-none" />
-          </div>
+          <CustomSelect
+            value={dateRange}
+            onChange={(val) => setDateRange(val as DateRange)}
+            options={DATE_RANGE_OPTIONS}
+            icon={<Calendar className="w-4 h-4 text-vivero-primary" />}
+            size="sm"
+            className="w-48"
+          />
           {dateRange === 'custom' && (
             <div className="flex items-center gap-2 bg-white rounded-xl border border-slate-200 px-3 py-2">
               <input
