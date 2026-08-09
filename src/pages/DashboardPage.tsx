@@ -434,8 +434,8 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
         </div>
 
         {/* Dark Green Hero Card */}
-        <div className="relative pt-2">
-          <div className="bg-gradient-to-r from-[#113320] via-[#1b4332] to-[#143d26] rounded-2xl sm:rounded-[24px] p-4 text-white shadow-md relative overflow-hidden flex items-center justify-between min-h-[110px]">
+        <div className="relative pt-6">
+          <div className="bg-gradient-to-r from-[#113320] via-[#1b4332] to-[#143d26] rounded-2xl sm:rounded-[24px] p-4 text-white shadow-md relative overflow-visible flex items-center justify-between min-h-[115px]">
             {/* Organic Wave Lines Overlay */}
             <svg className="absolute inset-0 w-full h-full pointer-events-none rounded-2xl opacity-20 overflow-hidden" fill="none">
               <path d="M -20 80 Q 80 120 180 60 T 340 90" stroke="#74c69d" strokeWidth="2.5" strokeLinecap="round" />
@@ -443,7 +443,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             </svg>
 
             {/* Left Card Info */}
-            <div className="space-y-1 z-10 max-w-[65%]">
+            <div className="space-y-1 z-10 max-w-[58%]">
               <span className="text-[11px] text-emerald-200/90 font-medium block tracking-wide">
                 Ventas del día
               </span>
@@ -455,12 +455,18 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               </p>
             </div>
 
-            {/* Integrated Potted Plant Image */}
-            <div className="relative w-28 sm:w-32 h-24 sm:h-28 flex-shrink-0 flex items-center justify-end pointer-events-none z-10">
+            {/* Large Protruding Potted Plant Image (GPU Layer Synced) */}
+            <div className="absolute right-1 -top-7 bottom-0 w-32 sm:w-38 pointer-events-none flex items-end justify-center z-20">
+              <div className="absolute bottom-0 right-4 w-20 sm:w-24 h-2 rounded-full bg-black/40 blur-xs transform scale-y-50 z-10 pointer-events-none" />
               <img
                 src="/planta.png"
                 alt={`Planta ${companyName}`}
-                className="w-full h-full object-contain filter drop-shadow-md"
+                className="w-full h-auto max-h-[145px] sm:max-h-[160px] object-contain relative z-20 origin-bottom drop-shadow-xl pointer-events-none"
+                style={{
+                  WebkitTransform: 'translateZ(0)',
+                  transform: 'translateZ(0)',
+                  willChange: 'transform'
+                }}
               />
             </div>
           </div>
