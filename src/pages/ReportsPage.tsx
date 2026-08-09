@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import {
-  BarChart3,
   TrendingUp,
   DollarSign,
   ShoppingCart,
-  Users,
   Package,
-  Calendar,
   Download,
   RefreshCw,
   ChevronDown,
@@ -28,9 +25,7 @@ import {
   Tooltip,
   PieChart,
   Pie,
-  Cell,
-  Funnel,
-  LabelList
+  Cell
 } from 'recharts';
 
 type DateRange = '7' | '30' | '90' | '365';
@@ -329,7 +324,8 @@ export const ReportsPage: React.FC = () => {
                 </Pie>
                 <Tooltip formatter={(val: any) => formatCurrency(val)} />
               </PieChart>
-            )}
+            </ResponsiveContainer>
+          )}
           {pieData.length > 0 && !loading && (
             <div className="space-y-2 mt-4">
               {pieData.map((item, i) => (
