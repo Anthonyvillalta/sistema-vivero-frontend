@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useCompanySettings } from '../context/CompanyContext';
 import {
-  Lock, User, Eye, EyeOff, ArrowRight, Leaf, AlertCircle,
+  Lock, Mail, Eye, EyeOff, ArrowRight, Leaf, AlertCircle,
   CheckCircle2, ShieldCheck, Sparkles, Store, Truck, BarChart3, KeyRound
 } from 'lucide-react';
 
@@ -10,7 +10,7 @@ export const LoginPage: React.FC = () => {
   const { login, isLoading } = useAuth();
   const { companyName } = useCompanySettings();
 
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
@@ -32,13 +32,13 @@ export const LoginPage: React.FC = () => {
     setError('');
     setSuccess('');
 
-    const ok = await login(username, password);
+    const ok = await login(email, password);
     if (!ok) {
-      setError('Usuario o contraseña incorrectos. Verifica tus datos.');
+      setError('Correo electrónico o contraseña incorrectos. Verifica tus datos.');
     }
   };
 
-  const isFormValid = username.trim().length > 0 && password.trim().length > 0;
+  const isFormValid = email.trim().length > 0 && password.trim().length > 0;
 
   return (
     <div className="min-h-screen w-full relative overflow-hidden bg-[#0a1f18] flex items-center justify-center p-3 sm:p-6 lg:p-8 font-sans select-none">
@@ -188,25 +188,24 @@ export const LoginPage: React.FC = () => {
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5 my-auto">
             
-            {/* Field: Username */}
+            {/* Field: Email */}
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center justify-between">
-                <span>Nombre de Usuario</span>
+                <span>Correo Electrónico</span>
                 <span className="text-[10px] text-emerald-400/80 font-semibold">Obligatorio</span>
               </label>
 
               <div className="relative group">
                 <div className="absolute left-3.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-xl bg-white/5 flex items-center justify-center group-focus-within:bg-vivero-mint/10 transition-colors">
-                  <User className="w-4 h-4 text-slate-400 group-focus-within:text-vivero-mint transition-colors" />
+                  <Mail className="w-4 h-4 text-slate-400 group-focus-within:text-vivero-mint transition-colors" />
                 </div>
 
                 <input
-                  type="text"
-                  value={username}
-                  onChange={(e) => { setUsername(e.target.value); setError(''); }}
+                  type="email"
+                  value={email}
+                  onChange={(e) => { setEmail(e.target.value); setError(''); }}
                   required
-                  minLength={3}
-                  placeholder="ej: admin, vendedor..."
+                  placeholder="ej: anthony.villalta@hotmail.com"
                   className="w-full pl-13 pr-4 py-3.5 bg-slate-800/80 border border-slate-700/80 rounded-2xl text-sm font-semibold text-white placeholder-slate-500 focus:outline-none focus:border-vivero-mint focus:ring-2 focus:ring-vivero-mint/20 transition-all shadow-inner"
                 />
               </div>
@@ -236,7 +235,7 @@ export const LoginPage: React.FC = () => {
                   onChange={(e) => { setPassword(e.target.value); setError(''); }}
                   onKeyDown={handleKeyDown}
                   required
-                  minLength={6}
+                  minLength={5}
                   placeholder="Ingresa tu contraseña"
                   className="w-full pl-13 pr-12 py-3.5 bg-slate-800/80 border border-slate-700/80 rounded-2xl text-sm font-semibold text-white placeholder-slate-500 focus:outline-none focus:border-vivero-mint focus:ring-2 focus:ring-vivero-mint/20 transition-all shadow-inner"
                 />
