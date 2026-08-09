@@ -143,12 +143,12 @@ export const ReportsPage: React.FC = () => {
       case '7': start = new Date(); start.setDate(end.getDate() - 7); break;
       case '30': start = new Date(); start.setDate(end.getDate() - 30); break;
       case '90': start = new Date(); start.setDate(end.getDate() - 90); break;
-      case 'all': start = new Date(); start.setFullYear(end.getFullYear(), 0, 1); break;
+      case 'all': start = new Date(2020, 0, 1); break;
       case 'custom':
-        start = customStartDate ? new Date(customStartDate) : new Date(end.getFullYear(), end.getMonth(), 1);
+        start = customStartDate ? new Date(customStartDate) : new Date(2020, 0, 1);
         end.setTime(customEndDate ? new Date(customEndDate).getTime() : end.getTime());
         break;
-      default: start = new Date(); start.setDate(end.getDate() - 30); break;
+      default: start = new Date(2020, 0, 1); break;
     }
     return { startDate: start.toISOString().split('T')[0], endDate: end.toISOString().split('T')[0] };
   };
