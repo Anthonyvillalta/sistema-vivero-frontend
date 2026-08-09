@@ -296,7 +296,7 @@ export const ReportsPage: React.FC = () => {
   const handleExportCSV = () => {
     if (!salesSummary) return;
     const rows: string[][] = [
-      ['Reporte Gerencial - Villa Verde ERP'],
+      ['Reporte Gerencial - Sistema Vivero ERP'],
       ['Fecha: ' + new Date().toLocaleDateString('es-PE')],
       ['Rango: ' + formatRangeLabel()],
       [''],

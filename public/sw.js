@@ -1,4 +1,4 @@
-const CACHE_NAME = 'villaverde-erp-v2';
+const CACHE_NAME = 'vivero-erp-v2';
 const urlsToCache = [
   '/',
   '/index.html',

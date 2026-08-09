@@ -132,7 +132,7 @@ export const LoginPage: React.FC = () => {
               <ShieldCheck className="w-4 h-4 text-emerald-400" />
               Conexión Encriptada SSL 256-bit
             </span>
-            <span>Villa Verde ERP © {new Date().getFullYear()}</span>
+            <span>{companyName || 'Sistema Vivero'} ERP © {new Date().getFullYear()}</span>
           </div>
         </div>
 
