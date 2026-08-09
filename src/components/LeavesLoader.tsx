@@ -80,8 +80,8 @@ export const LeavesLoader: React.FC<LeavesLoaderProps> = ({
         ))}
       </div>
 
-      {/* Centered Content Card */}
-      <div className="relative z-10 flex flex-col items-center justify-center gap-3 text-center bg-white/80 backdrop-blur-md border border-slate-200/80 px-8 py-6 rounded-3xl shadow-lg">
+      {/* Centered Transparent Content */}
+      <div className="relative z-10 flex flex-col items-center justify-center gap-3 text-center p-4">
         <div className="flex items-end gap-2.5 mb-1">
           {[0, 1, 2].map((i) => (
             <Leaf
