@@ -80,19 +80,36 @@ export const UsersPage: React.FC = () => {
   const [formError, setFormError] = useState('');
   const [formSuccess, setFormSuccess] = useState('');
 
+  const [fetchError, setFetchError] = useState(false);
+
   const fetchUsers = async () => {
     setLoading(true);
+    setFetchError(false);
     try {
       const res = await userApi.getAllUsers();
-      if (res?.data) setUsers(res.data);
+      if (res?.data) {
+        setUsers(res.data);
+      }
     } catch (err) {
-      console.error('Error fetching users:', err);
+      console.error('Error fetching users from MySQL:', err);
+      setFetchError(true);
     } finally {
       setLoading(false);
     }
   };
 
-  useEffect(() => { fetchUsers(); }, []);
+  useEffect(() => {
+    fetchUsers();
+    const handleSync = () => fetchUsers();
+    window.addEventListener('vivero_users_updated', handleSync);
+    window.addEventListener('vivero_backend_online', handleSync);
+    window.addEventListener('focus', handleSync);
+    return () => {
+      window.removeEventListener('vivero_users_updated', handleSync);
+      window.removeEventListener('vivero_backend_online', handleSync);
+      window.removeEventListener('focus', handleSync);
+    };
+  }, []);
 
   const handleRefresh = () => {
     setRefreshing(true);
@@ -205,6 +222,7 @@ export const UsersPage: React.FC = () => {
       }
 
       await fetchUsers();
+      window.dispatchEvent(new CustomEvent('vivero_users_updated'));
       setTimeout(() => closeModal(), 400);
     } catch (err: any) {
       console.error('Error saving user:', err);
@@ -224,6 +242,7 @@ export const UsersPage: React.FC = () => {
       await userApi.resetPassword(passUser.id!, newPasswordVal.trim());
       setFormSuccess('Contraseña restablecida correctamente');
       await fetchUsers();
+      window.dispatchEvent(new CustomEvent('vivero_users_updated'));
       setTimeout(() => closeModal(), 500);
     } catch (err: any) {
       console.error('Error resetting password:', err);
@@ -236,6 +255,7 @@ export const UsersPage: React.FC = () => {
     try {
       await userApi.deleteUser(id);
       await fetchUsers();
+      window.dispatchEvent(new CustomEvent('vivero_users_updated'));
     } catch (err: any) {
       console.error('Error deleting user:', err);
       alert(err.response?.data?.message || 'Error al eliminar el usuario');
@@ -246,6 +266,7 @@ export const UsersPage: React.FC = () => {
     try {
       await userApi.toggleUserStatus(user.id!);
       await fetchUsers();
+      window.dispatchEvent(new CustomEvent('vivero_users_updated'));
     } catch (err) {
       console.error('Error toggling status:', err);
     }
