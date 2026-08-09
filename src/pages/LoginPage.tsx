@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useCompanySettings } from '../context/CompanyContext';
 import {
@@ -25,12 +25,6 @@ export const LoginPage: React.FC = () => {
     } else {
       setCapsLockOn(false);
     }
-  };
-
-  const handleQuickFill = (user: string, pass: string) => {
-    setUsername(user);
-    setPassword(pass);
-    setError('');
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -65,7 +59,7 @@ export const LoginPage: React.FC = () => {
       </div>
 
       {/* Main Container Card */}
-      <div className="relative w-full max-w-5xl bg-slate-900/80 backdrop-blur-2xl border border-emerald-500/20 rounded-3xl sm:rounded-[32px] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)] overflow-hidden grid grid-cols-1 lg:grid-cols-12 min-h-[580px] lg:min-h-[640px]">
+      <div className="relative w-full max-w-5xl bg-slate-900/80 backdrop-blur-2xl border border-emerald-500/20 rounded-3xl sm:rounded-[32px] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)] overflow-hidden grid grid-cols-1 lg:grid-cols-12 min-h-[520px] lg:min-h-[580px]">
         
         {/* LEFT COLUMN: Hero Brand & Feature Showcase (Visible on lg screens) */}
         <div className="hidden lg:flex lg:col-span-6 relative flex-col justify-between p-10 bg-gradient-to-br from-[#1b4332]/90 via-[#143627]/95 to-[#0b2219] border-r border-emerald-500/15 overflow-hidden">
@@ -192,7 +186,7 @@ export const LoginPage: React.FC = () => {
           )}
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5 my-auto">
             
             {/* Field: Username */}
             <div className="space-y-1.5">
@@ -295,33 +289,6 @@ export const LoginPage: React.FC = () => {
               )}
             </button>
           </form>
-
-          {/* Quick Fill Pills for Easy Demo Testing */}
-          <div className="mt-6 pt-5 border-t border-slate-800/80">
-            <p className="text-[11px] font-bold text-slate-500 mb-2.5 uppercase tracking-wider text-center">
-              Acceso Rápido de Prueba (Demo)
-            </p>
-
-            <div className="grid grid-cols-2 gap-2">
-              <button
-                type="button"
-                onClick={() => handleQuickFill('admin', 'admin123')}
-                className="px-3 py-2 rounded-xl bg-slate-800/60 hover:bg-vivero-mint/10 border border-slate-700/60 hover:border-vivero-mint/40 text-slate-300 hover:text-vivero-mint text-xs font-bold transition-all flex items-center justify-center gap-1.5 group"
-              >
-                <span>👑</span>
-                <span>Admin</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => handleQuickFill('vendedor', 'vendedor123')}
-                className="px-3 py-2 rounded-xl bg-slate-800/60 hover:bg-emerald-500/10 border border-slate-700/60 hover:border-emerald-400/40 text-slate-300 hover:text-emerald-300 text-xs font-bold transition-all flex items-center justify-center gap-1.5 group"
-              >
-                <span>💼</span>
-                <span>Vendedor</span>
-              </button>
-            </div>
-          </div>
 
         </div>
 
