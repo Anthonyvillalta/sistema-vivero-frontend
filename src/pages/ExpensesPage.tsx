@@ -244,7 +244,7 @@ export const ExpensesPage: React.FC = () => {
       {/* Expenses List */}
       <div className="space-y-2.5">
         {loading ? (
-          <LeavesLoader compact message="Cargando gastos desde MySQL..." />
+          <LeavesLoader message="Cargando gastos desde MySQL..." />
         ) : sortedExpenses.length === 0 ? (
           <div className="bg-white rounded-2xl border border-dashed border-slate-300 p-8 text-center space-y-1.5">
             <Receipt className="w-8 h-8 text-slate-300 mx-auto" />

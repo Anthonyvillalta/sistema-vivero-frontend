@@ -244,7 +244,7 @@ export const SalesHistoryPage: React.FC = () => {
 
         {/* Sales List */}
         {loading ? (
-          <LeavesLoader compact message="Cargando ventas recientes desde MySQL..." />
+          <LeavesLoader message="Cargando ventas recientes desde MySQL..." />
         ) : filteredSales.length === 0 ? (
           <div className="py-12 text-center space-y-1 bg-slate-50 rounded-2xl border border-slate-100 p-6">
             <Receipt className="w-8 h-8 text-slate-300 mx-auto" />

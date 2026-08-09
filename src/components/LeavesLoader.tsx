@@ -56,8 +56,8 @@ export const LeavesLoader: React.FC<LeavesLoaderProps> = ({
 }) => {
   return (
     <div
-      className={`relative flex flex-col items-center justify-center w-full min-h-[300px] ${
-        fullscreen ? 'py-12' : 'py-8'
+      className={`relative flex flex-col items-center justify-center w-full my-auto ${
+        compact ? 'min-h-[260px] py-8' : 'min-h-[50vh] sm:min-h-[60vh] py-12'
       }`}
     >
       {/* Fullscreen Floating Leaves Layer */}

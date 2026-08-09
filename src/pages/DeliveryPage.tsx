@@ -166,7 +166,7 @@ export const DeliveryPage: React.FC<DeliveryPageProps> = () => {
 
       {/* View Content */}
       {loading ? (
-        <LeavesLoader compact message="Cargando datos desde la base de datos..." />
+        <LeavesLoader message="Cargando datos desde la base de datos..." />
       ) : (
         <>
           {activeTab === 'activos' && (
