@@ -43,7 +43,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         const newUser: User = {
           id: undefined,
           username: responseData.username,
-          fullName: responseData.fullName || 'Anthony Villalta',
+          fullName: responseData.fullName || responseData.username,
           role: role,
           token: responseData.token,
         };
@@ -54,24 +54,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
       return false;
     } catch (err: any) {
-      console.error('Login API error:', err?.response?.data?.message || err?.message);
-
-      // Local fallback for admin credentials if backend is redeploying or offline
-      if (
-        (cleanUser === 'anthony.villalta@hotmail.com' || cleanUser === 'admin') &&
-        cleanPass === '060697'
-      ) {
-        const fallbackUser: User = {
-          username: 'anthony.villalta@hotmail.com',
-          fullName: 'Anthony Villalta',
-          role: 'ROLE_ADMIN',
-          token: 'offline-jwt-token-anthony'
-        };
-        setUser(fallbackUser);
-        localStorage.setItem('vivero_user', JSON.stringify(fallbackUser));
-        localStorage.setItem('vivero_token', 'offline-jwt-token-anthony');
-        return true;
-      }
+      console.error('Login error:', err?.response?.data?.message || err?.message);
       return false;
     } finally {
       setIsLoading(false);
