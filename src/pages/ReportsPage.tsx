@@ -57,32 +57,27 @@ const StatCard: React.FC<{
   tooltip?: string;
 }> = ({ title, value, subtitle, icon, iconBg, trend = 'neutral', trendValue, tooltip }) => (
   <div
-    className="group relative bg-white rounded-2xl p-5 border border-slate-200/80 shadow-card transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5"
-    style={{ animationDelay: '0ms', animation: 'fadeInUp 0.5s ease-out forwards' }}
+    className="group relative bg-white rounded-2xl p-3 sm:p-5 border border-slate-200/80 shadow-2xs sm:shadow-card transition-all duration-300 hover:shadow-lg"
+    style={{ animationDelay: '0ms', animation: 'fadeInUp 0.4s ease-out forwards' }}
   >
-    <div className="flex items-start justify-between mb-3">
-      <div className={'w-11 h-11 rounded-xl flex items-center justify-center ' + iconBg + ' group-hover:scale-110 transition-transform duration-300'}>{icon}</div>
+    <div className="flex items-start justify-between mb-1.5 sm:mb-3">
+      <div className={'w-8 h-8 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center ' + iconBg + ' group-hover:scale-105 transition-transform duration-300'}>{icon}</div>
       {trend !== 'neutral' && (
-        <span className={'text-xs font-bold px-2 py-0.5 rounded-full flex items-center gap-1 ' +
+        <span className={'text-[10px] sm:text-xs font-bold px-1.5 py-0.2 sm:px-2 sm:py-0.5 rounded-full flex items-center gap-0.5 sm:gap-1 ' +
           (trend === 'up' ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700')}>
-          {trend === 'up' ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
+          {trend === 'up' ? <TrendingUp className="w-2.5 h-2.5 sm:w-3 sm:h-3" /> : <TrendingDown className="w-2.5 h-2.5 sm:w-3 sm:h-3" />}
           {trendValue}
         </span>
       )}
     </div>
-    <p className="text-xs font-bold text-slate-500 uppercase mb-1 flex items-center gap-1">
+    <p className="text-[10px] sm:text-xs font-bold text-slate-500 uppercase mb-0.5 sm:mb-1 flex items-center gap-1">
       {title}
       {tooltip && (
-        <Info className="w-3 h-3 text-slate-400 cursor-help opacity-0 group-hover:opacity-100 transition-opacity" />
+        <Info className="w-3 h-3 text-slate-400 cursor-help opacity-0 group-hover:opacity-100 transition-opacity hidden sm:inline-block" />
       )}
     </p>
-    <p className="text-2xl font-black text-slate-800">{value}</p>
-    {subtitle && <p className="text-xs text-slate-400 mt-0.5">{subtitle}</p>}
-    {tooltip && (
-      <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 px-2 py-1.5 bg-slate-800 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-10">
-        {tooltip}
-      </div>
-    )}
+    <p className="text-base sm:text-2xl font-black text-slate-800 leading-tight truncate">{value}</p>
+    {subtitle && <p className="text-[10px] sm:text-xs text-slate-400 mt-0.5 truncate">{subtitle}</p>}
   </div>
 );
 
@@ -367,58 +362,78 @@ export const ReportsPage: React.FC = () => {
         }
       `}</style>
 
-      {/* Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-black text-slate-800">Reportes Gerenciales</h1>
-          <p className="text-sm text-slate-500 mt-1">Análisis financiero, de inventario y de ventas para la toma de decisiones</p>
-        </div>
-        <div className="flex items-center gap-3">
-          <button
-            onClick={handleRefresh}
-            disabled={loading || refreshing}
-            className="flex items-center gap-2 px-4 py-2 bg-slate-100 text-slate-700 rounded-xl font-bold text-sm hover:bg-slate-200 transition-colors disabled:opacity-50"
-          >
-            <RefreshCw className={`w-4 h-4 ${refreshing ? 'animate-spin' : ''}`} />
-            Actualizar
-          </button>
-          <CustomSelect
-            value={dateRange}
-            onChange={(val) => setDateRange(val as DateRange)}
-            options={DATE_RANGE_OPTIONS}
-            icon={<Calendar className="w-4 h-4 text-vivero-primary" />}
-            size="sm"
-            className="w-48"
-          />
-          {dateRange === 'custom' && (
-            <div className="flex items-center gap-2 bg-white rounded-xl border border-slate-200 px-3 py-2">
-              <input
-                type="date"
-                value={customStartDate}
-                onChange={(e) => setCustomStartDate(e.target.value)}
-                className="border-none outline-none text-sm text-slate-700 w-32"
-              />
-              <span className="text-slate-300">–</span>
-              <input
-                type="date"
-                value={customEndDate}
-                onChange={(e) => setCustomEndDate(e.target.value)}
-                className="border-none outline-none text-sm text-slate-700 w-32"
-              />
-              <button onClick={clearCustomRange} className="text-slate-400 hover:text-slate-600">
-                <X className="w-4 h-4" />
-              </button>
+      {/* Hero Header Banner */}
+      <div className="relative overflow-hidden bg-gradient-to-br from-[#0f2e1f] via-[#1b4332] to-[#2d6a4f] rounded-2xl sm:rounded-3xl p-4 sm:p-6 text-white shadow-xl">
+        <div className="absolute -top-20 -right-16 w-40 sm:w-64 h-40 sm:h-64 rounded-full bg-vivero-mint/15 blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-24 -left-12 w-48 sm:w-72 h-48 sm:h-72 rounded-full bg-emerald-400/10 blur-3xl pointer-events-none" />
+
+        <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div className="p-2.5 sm:p-3 rounded-xl sm:rounded-2xl bg-white/10 border border-vivero-mint/25 shadow-inner flex-shrink-0">
+              <BarChart3 className="w-5 h-5 sm:w-7 sm:h-7 text-vivero-mint" />
             </div>
-          )}
-          <button
-            onClick={handleExportCSV}
-            disabled={loading || !salesSummary}
-            className="flex items-center gap-2 px-4 py-2 bg-vivero-primary text-white rounded-xl font-bold text-sm hover:bg-vivero-emerald transition-colors disabled:opacity-50"
-          >
-            <Download className="w-4 h-4" />
-            Exportar CSV
-          </button>
+            <div>
+              <h1 className="text-base sm:text-2xl font-black leading-tight tracking-tight">Reportes Gerenciales ERP</h1>
+              <p className="text-[11px] sm:text-xs text-emerald-200/90 font-medium mt-0.5">
+                Análisis financiero, inventario y flujo de ventas para la toma de decisiones
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap pt-1 sm:pt-0">
+            <button
+              onClick={handleRefresh}
+              disabled={loading || refreshing}
+              className="p-2 sm:px-3 sm:py-2 bg-white/10 hover:bg-white/20 rounded-xl transition-all text-white font-bold text-xs flex items-center gap-1.5 active:scale-95 disabled:opacity-50"
+              title="Actualizar datos"
+            >
+              <RefreshCw className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${refreshing ? 'animate-spin' : ''}`} />
+              <span className="hidden sm:inline">Actualizar</span>
+            </button>
+
+            <CustomSelect
+              value={dateRange}
+              onChange={(val) => setDateRange(val as DateRange)}
+              options={DATE_RANGE_OPTIONS}
+              icon={<Calendar className="w-3.5 h-3.5 text-vivero-mint" />}
+              size="sm"
+              className="w-36 sm:w-48"
+            />
+
+            <button
+              onClick={handleExportCSV}
+              disabled={loading || !salesSummary}
+              className="flex items-center gap-1.5 px-3 py-2 sm:px-4 sm:py-2 bg-vivero-mint text-vivero-dark font-black text-xs sm:text-sm rounded-xl hover:bg-white active:scale-95 transition-all shadow-md shadow-vivero-mint/20 disabled:opacity-50 ml-auto sm:ml-0"
+            >
+              <Download className="w-3.5 h-3.5 stroke-[2.5]" />
+              <span className="hidden sm:inline">Exportar CSV</span>
+              <span className="sm:hidden">CSV</span>
+            </button>
+          </div>
         </div>
+
+        {/* Custom Date Range Picker Bar on Mobile */}
+        {dateRange === 'custom' && (
+          <div className="mt-3 pt-3 border-t border-white/10 flex flex-wrap items-center gap-2 text-xs">
+            <span className="text-[10px] uppercase font-bold text-emerald-200">Rango:</span>
+            <input
+              type="date"
+              value={customStartDate}
+              onChange={(e) => setCustomStartDate(e.target.value)}
+              className="bg-white/10 border border-white/20 rounded-lg px-2 py-1 text-xs text-white outline-none"
+            />
+            <span className="text-emerald-200">–</span>
+            <input
+              type="date"
+              value={customEndDate}
+              onChange={(e) => setCustomEndDate(e.target.value)}
+              className="bg-white/10 border border-white/20 rounded-lg px-2 py-1 text-xs text-white outline-none"
+            />
+            <button onClick={clearCustomRange} className="p-1 text-emerald-200 hover:text-white">
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+        )}
       </div>
 
       {/* View Tabs */}
@@ -446,7 +461,7 @@ export const ReportsPage: React.FC = () => {
       {/* SALES VIEW */}
       {activeView === 'sales' && (
         <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
             {loading ? (
               <>
                 <SkeletonCard /><SkeletonCard /><SkeletonCard /><SkeletonCard />
@@ -565,7 +580,7 @@ export const ReportsPage: React.FC = () => {
       {/* EXPENSES VIEW */}
       {activeView === 'expenses' && (
         <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
             {loading ? (
               <>
                 <SkeletonCard /><SkeletonCard /><SkeletonCard /><SkeletonCard />
@@ -638,7 +653,7 @@ export const ReportsPage: React.FC = () => {
       {/* PURCHASES VIEW */}
       {activeView === 'purchases' && (
         <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
             {loading ? (
               <>
                 <SkeletonCard /><SkeletonCard /><SkeletonCard /><SkeletonCard />
@@ -703,7 +718,7 @@ export const ReportsPage: React.FC = () => {
       {/* PROFIT VIEW */}
       {activeView === 'profit' && (
         <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
             {loading ? (
               <>
                 <SkeletonCard /><SkeletonCard /><SkeletonCard /><SkeletonCard />
@@ -780,7 +795,7 @@ export const ReportsPage: React.FC = () => {
       {/* INVENTORY VIEW */}
       {activeView === 'inventory' && (
         <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
             {loading ? (
               <>
                 <SkeletonCard /><SkeletonCard /><SkeletonCard /><SkeletonCard />
@@ -823,7 +838,7 @@ export const ReportsPage: React.FC = () => {
             )}
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
             {loading ? (
               <>
                 <SkeletonCard /><SkeletonCard /><SkeletonCard /><SkeletonCard />
@@ -930,7 +945,7 @@ export const ReportsPage: React.FC = () => {
       {/* CUSTOMERS VIEW */}
       {activeView === 'customers' && (
         <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
             {loading ? (
               <>
                 <SkeletonCard /><SkeletonCard /><SkeletonCard /><SkeletonCard />

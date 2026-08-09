@@ -54,8 +54,8 @@ const getRoleIcon = (role: string) => {
 
 const STATUS_FILTER_OPTIONS = [
   { value: 'TODOS', label: 'Todos los Estados', badge: 'Todos', badgeColor: 'bg-slate-100 text-slate-600' },
-  { value: 'ACTIVOS', label: 'Solo Activos ✓', badge: 'Activos', badgeColor: 'bg-emerald-100 text-emerald-800' },
-  { value: 'INACTIVOS', label: 'Solo Inactivos 🚫', badge: 'Inactivos', badgeColor: 'bg-red-100 text-red-800' }
+  { value: 'ACTIVOS', label: 'Solo Activos', badge: 'Activos', badgeColor: 'bg-emerald-100 text-emerald-800' },
+  { value: 'INACTIVOS', label: 'Solo Inactivos', badge: 'Inactivos', badgeColor: 'bg-red-100 text-red-800' }
 ];
 
 export const UsersPage: React.FC = () => {
